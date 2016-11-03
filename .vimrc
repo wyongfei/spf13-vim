@@ -711,15 +711,26 @@
 
     " YouCompleteMe {
         if count(g:spf13_bundle_groups, 'youcompleteme')
+            set completeopt=longest,menu
             let g:acp_enableAtStartup = 0
+            
+            let g:ycm_confirm_extra_conf=1
 
             " enable completion from tags
-            let g:ycm_collect_identifiers_from_tags_files = 1
+            let g:ycm_collect_identifiers_from_tags_files = 0
+            let g:ycm_cache_omnifunc=0
+            let g:ycm_seed_identifiers_with_syntax=1
 
             " remap Ultisnips for compatibility for YCM
             let g:UltiSnipsExpandTrigger = '<C-j>'
             let g:UltiSnipsJumpForwardTrigger = '<C-j>'
             let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+            
+            "设置跳转的快捷键，可以跳转到definition和declaration  
+            nnoremap <leader>yc :YcmCompleter GoToDeclaration<CR>  
+            nnoremap <leader>yf :YcmCompleter GoToDefinition<CR>  
+            nnoremap <leader>yg :YcmCompleter GoToDefinitionElseDeclaration<CR>  
+            nmap <F4> :YcmDiags<CR>  
 
             " Enable omni completion.
             autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
